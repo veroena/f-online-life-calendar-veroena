@@ -1,3 +1,23 @@
+.moods__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.moods__link {
+  text-decoration: none;
+  height: 40px;
+  width: 100%;
+  background-color: #3E9BD1;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .moods__list {
   list-style: none;
   padding: 0;
@@ -12,7 +32,7 @@
 }
 
 .moods__item--happy {
-  background-color: yellow;
+  background-color: #FFCC00;
   height: 70px;
   width: 70px;
   border-radius: 50%;
@@ -24,7 +44,7 @@
 }
 
 .moods__item--sad {
-  background-color: red;
+  background-color: #FF5335;
   color: white;
   height: 70px;
   width: 70px;

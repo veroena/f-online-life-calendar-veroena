@@ -1,4 +1,7 @@
 import React from 'react';
+import Form from './components/Form';
+import Moods from './components/Moods';
+import {Route, Switch} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +37,6 @@ class App extends React.Component {
   }
 
   saveDailyMood(event) {
-    event.preventDefault();
     const {date, mood, message} = this.state;
     const dailyObject = {date, mood, message};
     if(date !== '' && mood !== '' && this.checkDate() === true) {
@@ -43,8 +45,14 @@ class App extends React.Component {
         localStorage.setItem('moods', JSON.stringify(newMoods));
         return ({moods : newMoods, date: '', mood: '', message: '', isEmpty: false}); 
       });
-    } else if (date === '' && mood === ''){
+    } else if (date === '' || mood === ''){
+      event.preventDefault();
       this.setState({isEmpty: true});
+    } else if (date === '' && mood === ''){
+      event.preventDefault();
+      this.setState({isEmpty: true});
+    } else if(this.checkDate() === false) {
+      event.preventDefault();
     }
   }
 
@@ -63,60 +71,31 @@ class App extends React.Component {
     }
   }
 
-  // saveData(obj) {
-  //   localStorage.setItem('moods', JSON.stringify(obj))
-  // }
-
-  // componentDidMount() {
-    
-  // }
-
   render() {
     const { date, message, moods, mood, isEmpty, repeatedDate } = this.state;
+    // if (redirect === true) {
+    //   return <Redirect to="/" />
+    // };
     return (
       <div className="App">
-        <form action="" className="form__moods">
-          <fieldset className={`form__fieldset fieldset__date ${isEmpty && date === '' ? 'red' : null}`}>
-            <label htmlFor="date" className="label__date">Fecha</label>
-            <input type="date" className="input__date" id="date" onChange={this.getDate} value={date}/>
-            {isEmpty && date === '' ? <p className="error__date">Por favor, introduce una fecha válida</p> : null}
-            {repeatedDate ? <p className="error__date">Ya introdujiste una entrada con esta fecha</p> : null}
-          </fieldset>
-          <fieldset className={`form__fieldset fieldset__mood ${isEmpty && mood === '' ? 'red' : null}`}>
-            <label htmlFor="mood" className="label__mood">Estado</label>
-            <input type="radio" className="input__mood" id="mood" value=":)" onChange={this.getMood} checked={mood === ':)'}/> :)
-            <input type="radio" className="input__mood" id="mood" value=":(" onChange={this.getMood} checked={mood === ':('}/> :(
-            {isEmpty && mood === '' ? <p className="error__mood">Por favor, selecciona una opción</p> : null}            
-          </fieldset>
-          <fieldset className="form__fieldset fieldset__message">
-            <label htmlFor="message" className="label__message">Mensaje</label>
-            {mood !== ':(' ?
-              <input type="message" className="input__message" id="message" onChange={this.getMessage} value={message} placeholder="¿Por qué ha sido un buen día?"/>
-            :
-              <p className="message__sad">De esto no hace falta acordarnos ;)</p>
-            }
-          </fieldset>
-          <button className="button__save" onClick={this.saveDailyMood}>Guardar</button>
-          <button className="button__cancel">Cancelar</button>
-        </form>
-        <div className="moods">
-            {moods.length === 0 ?
-              null
-            :
-              <ul className="moods__list">
-                {moods.map((item, index) =>
-                  <li className="moods__item" key={index}>
-                    {item.mood === ':)' ?
-                      <p className="moods__item--happy">:)</p>
-                    :
-                      <p className="moods__item--sad">:(</p>
-                    }
-                  </li>
-                )}
-              </ul>
-            }
-        </div>
-  
+        <Switch>
+          <Route path="/form" render={() => (
+            <Form
+              isEmpty={isEmpty}
+              date={date}
+              repeatedDate={repeatedDate}
+              mood={mood}
+              message={message}
+              getMessage={this.getMessage}
+              getDate={this.getDate}
+              getMood={this.getMood}
+              saveDailyMood={this.saveDailyMood}
+            />
+          )}/>
+          <Route path="/" render={() => (
+            <Moods moods={moods} />)}
+          />
+        </Switch>
       </div>
     );
   }

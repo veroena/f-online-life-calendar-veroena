@@ -2,6 +2,7 @@
   list-style: none;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
 }
@@ -33,4 +34,8 @@
   align-items: center;
   font-size: 40px;
   margin: 0;
+}
+
+.red {
+  background-color: red;
 }

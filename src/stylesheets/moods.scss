@@ -1,0 +1,36 @@
+.moods__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.moods__item {
+  margin: 5px;
+}
+
+.moods__item--happy {
+  background-color: yellow;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin: 0;
+}
+
+.moods__item--sad {
+  background-color: red;
+  color: white;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin: 0;
+}

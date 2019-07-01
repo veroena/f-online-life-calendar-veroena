@@ -73,9 +73,6 @@ class App extends React.Component {
 
   render() {
     const { date, message, moods, mood, isEmpty, repeatedDate } = this.state;
-    // if (redirect === true) {
-    //   return <Redirect to="/" />
-    // };
     return (
       <div className="App">
         <Switch>
@@ -102,3 +99,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+

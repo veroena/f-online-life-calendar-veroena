@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Moods extends React.Component {
   render() {
@@ -29,6 +30,10 @@ class Moods extends React.Component {
       </div>
     );
   }
+}
+
+Moods.propTypes = {
+  moods: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Moods;
